@@ -4,7 +4,7 @@
   <artifactId>youtube-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Youtube API</name>
-  <description>An API that fetches latest YouTube videos.</description>
+  <description>An API that fetches the latest YouTube videos for a given topic/search in reverse chronological order of their publishing date-time.</description>
   
   <properties>
   	<java.version>1.8</java.version>
@@ -20,6 +20,11 @@
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-configuration-processor</artifactId>
+    	<optional>true</optional>
     </dependency>
 </dependencies>
   
