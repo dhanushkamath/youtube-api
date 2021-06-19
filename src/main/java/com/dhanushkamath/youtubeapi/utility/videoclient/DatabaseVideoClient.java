@@ -22,8 +22,8 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 
 	@Override
 	public List<Video> searchVideosByText(String text) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Video> videoList = databaseService.getVideosSearchByText(text);
+		return videoList;
 	}
 
 }

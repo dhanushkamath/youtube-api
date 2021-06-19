@@ -4,15 +4,28 @@ import java.time.Instant;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
-@Document(collection="Book")
+@Document(collection="Video")
 public class Video {
 	@Id
 	private String videoId;
 	
+	@TextIndexed(weight=2)
 	private String title;
+	
+	@TextIndexed()
 	private String description;
+	
+	// Only used while running full text search. Used for sorting text search results.
+	@TextScore
+	private Float textSearchScore; 
+	
+	@Indexed(name = "publishedAt_index", direction = IndexDirection.DESCENDING)
 	private Instant publishedAt;
 
 	Map<String, Thumbnail> thumbnails; 

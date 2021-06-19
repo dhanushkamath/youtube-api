@@ -53,9 +53,9 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 			itemsNode.forEach(item -> {
 				Video video = objectMapper.convertValue(item.get("snippet"), Video.class);
 				video.setVideoId(item.get("id").get("videoId").asText());
-				System.out.println(video.toString());
 				videoList.add(video);
 			});
+			logger.info("Fetched {} videos from YouTube.", videoList.size());
 		} catch (JsonProcessingException e) {
 			logger.warn(e.getMessage());
 		}

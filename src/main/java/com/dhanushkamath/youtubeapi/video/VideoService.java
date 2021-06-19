@@ -14,7 +14,7 @@ import com.dhanushkamath.youtubeapi.utility.videoclient.IVideoSearchClient;
 public class VideoService {
 	
 	@Autowired
-	@Qualifier("databaseVideoClient")
+	@Qualifier("youtubeVideoClient")
 	IVideoFetchClient videoFetchClient;
 	
 	@Autowired
@@ -27,6 +27,12 @@ public class VideoService {
 	
 	public List<Video> getVideos(){
 		List<Video> videoList = videoFetchClient.getLatestVideos();
+		dbService.saveVideoList(videoList);
+		return videoList;
+	}
+	
+	public List<Video> getVideosSearchByText(String text){
+		List<Video> videoList = videoSearchClient.searchVideosByText(text);
 		return videoList;
 	}
 }
