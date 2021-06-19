@@ -1,9 +1,9 @@
 package com.dhanushkamath.youtubeapi.video;
 
 public class Thumbnail {
-	String url;
-	String width;
-	String height;
+	private String url;
+	private String width;
+	private String height;
 	
 	
 	public Thumbnail() {

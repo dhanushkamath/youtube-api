@@ -17,12 +17,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.dhanushkamath.youtubeapi.constants.Constants;
 import com.dhanushkamath.youtubeapi.video.Video;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-@Service
+@Service("youtubeVideoClient")
 public class YoutubeVideoClient implements IVideoFetchClient {
 	
 	Logger logger = LoggerFactory.getLogger(YoutubeVideoClient.class);
@@ -44,14 +42,17 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_MAXRESULTS, "25")
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_ORDER, Constants.YOUTUBE_QUERYPARAM_ORDER_VALUE)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_Q, "cricket")
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_TYPE, Constants.YOUTUBE_QUERYPARAM_TYPE_VALUE)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, "AIzaSyAG27rXrmqvQxSaOmsKfULgUycj-xToiG4");
 		
 		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
 		List<Video> videoList = new ArrayList<>();
 		try {
 			ArrayNode itemsNode = (ArrayNode) objectMapper.readTree(response.getBody()).get("items");
 			itemsNode.forEach(item -> {
 				Video video = objectMapper.convertValue(item.get("snippet"), Video.class);
+				video.setVideoId(item.get("id").get("videoId").asText());
 				System.out.println(video.toString());
 				videoList.add(video);
 			});

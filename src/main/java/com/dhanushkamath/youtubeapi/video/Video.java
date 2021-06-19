@@ -3,10 +3,17 @@ package com.dhanushkamath.youtubeapi.video;
 import java.time.Instant;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="Book")
 public class Video {
-	String title;
-	String description;
-	Instant publishedAt;
+	@Id
+	private String videoId;
+	
+	private String title;
+	private String description;
+	private Instant publishedAt;
 
 	Map<String, Thumbnail> thumbnails; 
 	
@@ -53,13 +60,22 @@ public class Video {
 	public void setThumbnails(Map<String, Thumbnail> thumbnails) {
 		this.thumbnails = thumbnails;
 	}
+	
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
 
 	@Override
 	public String toString() {
-		return "Video [title=" + title + ", description=" + description + ", datetime=" + publishedAt + ", thumbnails="
-				+ thumbnails + "]";
+		return "Video [title=" + title + ", description=" + description + ", publishedAt=" + publishedAt + ", videoId="
+				+ videoId + ", thumbnails=" + thumbnails + "]";
 	}
-	
+
+
 	
 	
 }

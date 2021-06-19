@@ -15,6 +15,8 @@ public final class Constants {
 	public static final String YOUTUBE_QUERYPARAM_Q = "q";
 	public static final String YOUTUBE_QUERYPARAM_KEY = "key";
 	public static final String YOUTUBE_QUERYPARAM_MAXRESULTS = "maxResults";
+	public static final String YOUTUBE_QUERYPARAM_TYPE = "type";
+	public static final String YOUTUBE_QUERYPARAM_TYPE_VALUE = "video";
 	
 	
 }
