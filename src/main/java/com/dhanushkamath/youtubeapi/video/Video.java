@@ -6,7 +6,8 @@ import java.util.Map;
 public class Video {
 	String title;
 	String description;
-	Instant datetime;
+	Instant publishedAt;
+
 	Map<String, Thumbnail> thumbnails; 
 	
 	public Video() {
@@ -17,7 +18,7 @@ public class Video {
 		super();
 		this.title = title;
 		this.description = description;
-		this.datetime = datetime;
+		this.publishedAt = datetime;
 		this.thumbnails = thumbnails;
 	}
 
@@ -37,12 +38,12 @@ public class Video {
 		this.description = description;
 	}
 
-	public Instant getDatetime() {
-		return datetime;
+	public Instant getPublishedAt() {
+		return publishedAt;
 	}
 
-	public void setDatetime(Instant datetime) {
-		this.datetime = datetime;
+	public void setPublishedAt(Instant publishedAt) {
+		this.publishedAt = publishedAt;
 	}
 
 	public Map<String, Thumbnail> getThumbnails() {
@@ -52,6 +53,13 @@ public class Video {
 	public void setThumbnails(Map<String, Thumbnail> thumbnails) {
 		this.thumbnails = thumbnails;
 	}
+
+	@Override
+	public String toString() {
+		return "Video [title=" + title + ", description=" + description + ", datetime=" + publishedAt + ", thumbnails="
+				+ thumbnails + "]";
+	}
+	
 	
 	
 }

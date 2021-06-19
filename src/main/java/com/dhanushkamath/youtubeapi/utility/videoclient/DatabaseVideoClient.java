@@ -6,12 +6,18 @@ import org.springframework.stereotype.Service;
 
 import com.dhanushkamath.youtubeapi.video.Video;
 
-@Service
-public class DatabaseVideoClient implements IVideoClient{
+
+public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClient{
 
 	@Override
 	public List<Video> getLatestVideos() {
 		// TODO implement database video fetch
+		return null;
+	}
+
+	@Override
+	public List<Video> searchVideosByText(String text) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

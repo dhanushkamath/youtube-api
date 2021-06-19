@@ -1,12 +1,14 @@
 package com.dhanushkamath.youtubeapi.info;
 
+import com.dhanushkamath.youtubeapi.constants.Constants;
+
 public class Info {
 	String name;
 	String description;
 	String status;
 	
 	public Info() {
-		status = Constants.INFO_DEFAULT_STATUS;
+		status = Constants.INFO_DEFAULTSTATUS;
 	}
 	
 	public String getName() {
