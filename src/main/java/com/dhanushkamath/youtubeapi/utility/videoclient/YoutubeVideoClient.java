@@ -21,11 +21,14 @@ import com.dhanushkamath.youtubeapi.video.Video;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import java.time.format.DateTimeFormatter; 
+import java.time.LocalDateTime;
 
 @Service("youtubeVideoClient")
 public class YoutubeVideoClient implements IVideoFetchClient {
 
 	private Logger logger = LoggerFactory.getLogger(YoutubeVideoClient.class);
+	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"); 
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -57,8 +60,8 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 				.queryParam(Constants.YOUTUBE_QUERYPARAM_ORDER, Constants.YOUTUBE_QUERYPARAM_ORDER_VALUE)
 				.queryParam(Constants.YOUTUBE_QUERYPARAM_Q, videoFetchTopic)
 				.queryParam(Constants.YOUTUBE_QUERYPARAM_TYPE, Constants.YOUTUBE_QUERYPARAM_TYPE_VALUE)
+				.queryParam(Constants.YOUTUBE_QUERYPARAM_PUBLISHEDAFTER, this.getDateTimeFiveDaysBeforeFromNow())
 				.queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, apiKeyService.getCurrentApiKey());
-
 		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,
 				String.class);
 
@@ -76,6 +79,12 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 		}
 
 		return videoList;
+	}
+	
+	
+	private String getDateTimeFiveDaysBeforeFromNow() {
+		LocalDateTime dt = LocalDateTime.now().minusDays(5);
+		return dateTimeFormatter.format(dt);
 	}
 
 }

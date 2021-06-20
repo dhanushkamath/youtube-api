@@ -1,0 +1,108 @@
+{
+	"variables": [],
+	"info": {
+		"name": "youtube-api",
+		"_postman_id": "5fc40127-86bd-f559-3a8e-642d5d5a5ee2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "spring-boot-app",
+			"description": "",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"url": "http://localhost:8080/api/info",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "videos",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/videos?size=3&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"videos"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "3",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "videos-search",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/api/videos?text=england&size=5&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"videos"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "england",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

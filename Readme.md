@@ -39,11 +39,18 @@ Run the application with the command:
   ```bash
   $ docker-compose up
   ```
-  
+
+Test the API with the included Postman collection - [Postman](test/)  
+
 To scale youtube-api-app service, use:
   ```bash
   $ docker-compose up --scale youtube-api-app=<number-of-containers>
   ```
+
+## Code Overview
+### Application Structure
+- `src/main/java` - This folder contains the application source code.
+- `test/` - This folder contains the POSTMAN collection with all requests configured.
 
 ## API
 ## GET /videos

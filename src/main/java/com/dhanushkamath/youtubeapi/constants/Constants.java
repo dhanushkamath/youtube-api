@@ -20,10 +20,11 @@ public final class Constants {
 	public static final String YOUTUBE_QUERYPARAM_MAXRESULTS = "maxResults";
 	public static final String YOUTUBE_QUERYPARAM_TYPE = "type";
 	public static final String YOUTUBE_QUERYPARAM_TYPE_VALUE = "video";
-
+	public static final String YOUTUBE_QUERYPARAM_PUBLISHEDAFTER = "publishedAfter";
+	
+	
 	public static final String DBSERVICE_VIDEO_PUBLISHEDAT = "publishedAt";
 	public static final String DBSERVICE_VIDEO_TEXTSEARCHSCORE = "textSearchScore";
 
 	public static final int VIDEOCONTROLLER_DEFAULT_VIDEO_SIZE = 10;
-
 }
