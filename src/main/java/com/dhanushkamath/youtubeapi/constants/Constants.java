@@ -20,4 +20,8 @@ public final class Constants {
 	
 	public static final String DBSERVICE_VIDEO_PUBLISHEDAT = "publishedAt";
 	public static final String DBSERVICE_VIDEO_TEXTSEARCHSCORE = "textSearchScore";
+	
+	public static final int VIDEOCONTROLLER_DEFAULT_VIDEO_SIZE = 10;
+	
+	
 }

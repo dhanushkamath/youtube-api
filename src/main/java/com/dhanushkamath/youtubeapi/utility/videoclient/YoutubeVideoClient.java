@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.dhanushkamath.youtubeapi.constants.Constants;
+import com.dhanushkamath.youtubeapi.utility.apikey.ApiKeyService;
 import com.dhanushkamath.youtubeapi.video.Video;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,11 +33,11 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Value("${video.topic:cricket}")
-	private String videoTopic;
+	@Value("${video.fetch.topic:surfing}")
+	private String videoFetchTopic;
 	
-	@Value("${youtubeapi.key}")
-	private String youtubeApiKey;
+	@Autowired
+	private ApiKeyService apiKeyService;
 	
 	@Override
 	public List<Video> getLatestVideos(int maxResults) {		
@@ -48,9 +49,9 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_PART, Constants.YOUTUBE_QUERYPARAM_PART_VALUE)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_MAXRESULTS, maxResults)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_ORDER, Constants.YOUTUBE_QUERYPARAM_ORDER_VALUE)
-		        .queryParam(Constants.YOUTUBE_QUERYPARAM_Q, this.videoTopic)
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_Q, videoFetchTopic)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_TYPE, Constants.YOUTUBE_QUERYPARAM_TYPE_VALUE)
-		        .queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, youtubeApiKey);
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, apiKeyService.getCurrentApiKey());
 		
 		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 		
@@ -62,7 +63,7 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 				video.setVideoId(item.get("id").get("videoId").asText());
 				videoList.add(video);
 			});
-			logger.info("Fetched {} videos from YouTube.", videoList.size());
+			logger.info("Fetched {} {} videos from YouTube.", videoList.size(), videoFetchTopic);
 		} catch (JsonProcessingException e) {
 			logger.warn(e.getMessage());
 		}
