@@ -15,6 +15,7 @@ An API that fetches the latest YouTube videos for a given topic. <br><br>
 
 # Table of Contents
 - [Getting Started](#getting-started)
+- [Code Overview](#code-overview)
 - [API](#api)
 <br>
 
