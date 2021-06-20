@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dhanushkamath</groupId>
   <artifactId>youtube-api</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Youtube API</name>
   <description>An API that fetches the latest YouTube videos for a given topic/search in reverse chronological order of their publishing date-time.</description>
   
@@ -40,5 +40,25 @@
 	</dependency>
 
 </dependencies>
+
+<build>
+	<plugins>
+		<plugin>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-maven-plugin</artifactId>
+		        <configuration>
+		            <mainClass>com.dhanushkamath.youtubeapi.YoutubeApiApp</mainClass>
+		        </configuration>
+		
+		        <executions>
+		            <execution>
+		                <goals>
+		                    <goal>repackage</goal>
+		                </goals>
+		            </execution>
+		       </executions>
+		</plugin>
+	</plugins>
+</build>
   
 </project>
