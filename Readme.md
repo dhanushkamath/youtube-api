@@ -1,4 +1,4 @@
-# Youtube-Api
+# Youtube API
 <p align="center">
 An API that fetches the latest YouTube videos for a given topic. <br><br>
   <a href="https://spring.io/projects/spring-boot">
