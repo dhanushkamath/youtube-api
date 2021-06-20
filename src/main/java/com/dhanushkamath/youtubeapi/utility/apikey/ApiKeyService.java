@@ -19,13 +19,11 @@ public class ApiKeyService {
 	private Logger logger = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 	
 	public String getCurrentApiKey() {
-		logger.info("Current Key: {}", keyList.get(this.currentKeyIndex));
 		return keyList.get(this.currentKeyIndex);
 	}
 	
 	public synchronized void changeKey() {
 		this.currentKeyIndex = ( (this.currentKeyIndex + 1) % keyList.size() );
-		logger.info("Key index: {} New Key: {}", currentKeyIndex, getCurrentApiKey());
 	}
 	
 }

@@ -47,12 +47,25 @@ public class DatabaseService {
 	}
 
 	/*
-	 * Get the top search results for text
+	 * Get the top search results for provided text limited by maxResults
 	 */
-	public List<Video> getVideosSearchByText(String text) {
+	public List<Video> getVideosByText(String text, int maxResults) {
 		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(text.split("\\s+"));
-		List<Video> videoList = videoRepository.findAllBy(criteria,
-				Sort.by(Sort.Direction.DESC, Constants.DBSERVICE_VIDEO_TEXTSEARCHSCORE));
+		Pageable paging = PageRequest.of(0, maxResults)
+				.withSort(Sort.by(Sort.Direction.DESC, Constants.DBSERVICE_VIDEO_TEXTSEARCHSCORE));
+		Page<Video> videoPage = videoRepository.findAllBy(criteria, paging);
+		List<Video> videoList = videoPage.getContent();
 		return videoList;
+	}
+		
+	/*
+	 * Get the paginated top search results for provided text
+	 */
+	public Page<Video> getVideosByText(String text, int page, int size) {
+		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(text.split("\\s+"));
+		Pageable paging = PageRequest.of(page, size)
+				.withSort(Sort.by(Sort.Direction.DESC, Constants.DBSERVICE_VIDEO_TEXTSEARCHSCORE));
+		Page<Video> videoPage = videoRepository.findAllBy(criteria, paging);
+		return videoPage;
 	}
 }

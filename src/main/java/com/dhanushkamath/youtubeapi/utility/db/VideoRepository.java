@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.dhanushkamath.youtubeapi.video.Video;
 
 public interface VideoRepository extends MongoRepository<Video, String> {
-	List<Video> findAllBy(TextCriteria textCriteria, Sort sort);
-
+	Page<Video> findAllBy(TextCriteria textCriteria, Pageable page);
+	List<Video> findAllBy(TextCriteria textCriteria);
 	Page<Video> findAll(Pageable pageable);
 }
