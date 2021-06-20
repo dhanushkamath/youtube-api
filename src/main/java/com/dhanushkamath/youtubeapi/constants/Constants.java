@@ -18,5 +18,6 @@ public final class Constants {
 	public static final String YOUTUBE_QUERYPARAM_TYPE = "type";
 	public static final String YOUTUBE_QUERYPARAM_TYPE_VALUE = "video";
 	
-	
+	public static final String DBSERVICE_VIDEO_PUBLISHEDAT = "publishedAt";
+	public static final String DBSERVICE_VIDEO_TEXTSEARCHSCORE = "textSearchScore";
 }

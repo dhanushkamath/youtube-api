@@ -15,7 +15,7 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 	DatabaseService databaseService;
 	
 	@Override
-	public List<Video> getLatestVideos() {
+	public List<Video> getLatestVideos(int maxResults) {
 		List<Video> videoList = databaseService.getVideosInReverseChronologicOrder();
 		return videoList;
 	}

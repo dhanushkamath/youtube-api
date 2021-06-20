@@ -18,14 +18,13 @@ public class VideoController {
 	
 	@RequestMapping("/videos")
 	public ResponseEntity<List<Video>> getVideos(){
-		List<Video> videoList = videoService.getVideos();
+		List<Video> videoList = videoService.getVideos(25);
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(videoList);
 	}
 	
 	@RequestMapping("/videos/search")
 	public ResponseEntity<List<Video>> getVideosSearchByText(@RequestParam String text){
 		List<Video> videoList = videoService.getVideosSearchByText(text);
-		System.out.println("Text: "+ text);
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(videoList);
 	}
 }

@@ -14,20 +14,16 @@ import com.dhanushkamath.youtubeapi.utility.videoclient.IVideoSearchClient;
 public class VideoService {
 	
 	@Autowired
-	@Qualifier("youtubeVideoClient")
+	@Qualifier("databaseVideoClient")
 	IVideoFetchClient videoFetchClient;
 	
 	@Autowired
 	@Qualifier("databaseVideoClient")
 	IVideoSearchClient videoSearchClient;
 	
-	// TODO remove this.
-	@Autowired
-	DatabaseService dbService;
 	
-	public List<Video> getVideos(){
-		List<Video> videoList = videoFetchClient.getLatestVideos();
-		dbService.saveVideoList(videoList);
+	public List<Video> getVideos(int maxResults){
+		List<Video> videoList = videoFetchClient.getLatestVideos(maxResults);
 		return videoList;
 	}
 	

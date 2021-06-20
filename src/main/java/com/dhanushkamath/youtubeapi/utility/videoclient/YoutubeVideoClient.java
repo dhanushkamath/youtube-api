@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,27 +24,33 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 @Service("youtubeVideoClient")
 public class YoutubeVideoClient implements IVideoFetchClient {
 	
-	Logger logger = LoggerFactory.getLogger(YoutubeVideoClient.class);
+	private Logger logger = LoggerFactory.getLogger(YoutubeVideoClient.class);
 	
 	@Autowired
-	RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
+	
+	@Value("${video.topic:cricket}")
+	private String videoTopic;
+	
+	@Value("${youtubeapi.key}")
+	private String youtubeApiKey;
 	
 	@Override
-	public List<Video> getLatestVideos() {		
+	public List<Video> getLatestVideos(int maxResults) {		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(Constants.YOUTUBE_URL_SEARCH)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_PART, Constants.YOUTUBE_QUERYPARAM_PART_VALUE)
-		        .queryParam(Constants.YOUTUBE_QUERYPARAM_MAXRESULTS, "25")
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_MAXRESULTS, maxResults)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_ORDER, Constants.YOUTUBE_QUERYPARAM_ORDER_VALUE)
-		        .queryParam(Constants.YOUTUBE_QUERYPARAM_Q, "cricket")
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_Q, this.videoTopic)
 		        .queryParam(Constants.YOUTUBE_QUERYPARAM_TYPE, Constants.YOUTUBE_QUERYPARAM_TYPE_VALUE)
-		        .queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, "AIzaSyAG27rXrmqvQxSaOmsKfULgUycj-xToiG4");
+		        .queryParam(Constants.YOUTUBE_QUERYPARAM_KEY, youtubeApiKey);
 		
 		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 		
