@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-  app:  # spring boot application
+  youtube-api-app:  # spring boot application
     image: dhanushkamath/youtube-api:1.0.0
     depends_on: 
       - mongo
     restart: always
     environment: 
-      - spring.data.mongodb.host=mongo
+      - api.key.list=<key1>,<key2>,<key3> # Replace key1, key2, key3 .. with api keys.
       - video.fetch.topic=cricket
       - video.fetch.interval=30000
-
+      - spring.data.mongodb.host=mongo
     ports: 
       - '8080:8080' 
 
