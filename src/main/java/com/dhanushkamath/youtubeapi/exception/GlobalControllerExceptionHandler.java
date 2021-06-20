@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalControllerExceptionHandler {
 
 	private Logger logger = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
-		 
+
 }

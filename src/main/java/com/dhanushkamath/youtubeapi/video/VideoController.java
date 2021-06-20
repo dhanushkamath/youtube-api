@@ -22,39 +22,43 @@ import com.dhanushkamath.youtubeapi.utility.videoclient.YoutubeVideoClient;
  * */
 @RestController
 public class VideoController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(VideoController.class);
-	
+
 	@Autowired
 	VideoService videoService;
-	
-	/** handles Get requests to /videos endpoint
+
+	/**
+	 * handles Get requests to /videos endpoint
+	 * 
 	 * @param page the page number
 	 * @param size the page size
-	 * @param text text to be searched for within title and description of stored collection of videos.
-	 * */
+	 * @param text text to be searched for within title and description of stored
+	 *             collection of videos.
+	 */
 	@RequestMapping("/videos")
-	public ResponseEntity<Map<String, Object>> getVideos(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer size, @RequestParam(required=false) String text){
+	public ResponseEntity<Map<String, Object>> getVideos(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer size, @RequestParam(required = false) String text) {
 		Map<String, Object> videos = new HashMap<>();
-		
+
 		text = (text == null) ? null : text.trim();
 		size = (size == null || size <= 0) ? Constants.VIDEOCONTROLLER_DEFAULT_VIDEO_SIZE : size;
-		
-		if(page == null) {
-			if(text == null || text.isEmpty()) {
+
+		if (page == null) {
+			if (text == null || text.isEmpty()) {
 				videos = videoService.getVideos(size);
 			} else {
 				videos = videoService.getVideos(text, size);
 			}
 		} else {
-			if(text == null || text.isEmpty()) {
+			if (text == null || text.isEmpty()) {
 				videos = videoService.getVideos(page, size);
 			} else {
 				videos = videoService.getVideos(text, page, size);
 			}
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(videos);
 	}
-	
+
 }

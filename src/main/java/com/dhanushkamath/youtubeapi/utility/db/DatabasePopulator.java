@@ -18,8 +18,9 @@ import com.dhanushkamath.youtubeapi.utility.apikey.ApiKeyService;
 import com.dhanushkamath.youtubeapi.utility.videoclient.IVideoFetchClient;
 import com.dhanushkamath.youtubeapi.video.Video;
 
-/** Utility for populating DB with fresh video results periodically.
- * */
+/**
+ * Utility for populating DB with fresh video results periodically.
+ */
 @Component
 public class DatabasePopulator {
 	@Autowired
@@ -28,7 +29,7 @@ public class DatabasePopulator {
 
 	@Autowired
 	private DatabaseService dbService;
-	
+
 	@Autowired
 	ApiKeyService apiKeyService;
 
@@ -36,9 +37,10 @@ public class DatabasePopulator {
 	private int videoFetchMaxResults;
 
 	private Logger logger = LoggerFactory.getLogger(DatabasePopulator.class);
-	
-	/** Fetches videos from YouTube periodically and saves it in DB.
-	 * */
+
+	/**
+	 * Fetches videos from YouTube periodically and saves it in DB.
+	 */
 	@Scheduled(fixedDelayString = "${video.fetch.interval}")
 	public void fetchAndPopulate() {
 		try {
@@ -48,7 +50,7 @@ public class DatabasePopulator {
 		} catch (HttpClientErrorException e) {
 			HttpStatus statusCode = e.getStatusCode();
 			logger.warn("The HTTP client returned a {} response", statusCode);
-			if( statusCode == HttpStatus.FORBIDDEN ) {
+			if (statusCode == HttpStatus.FORBIDDEN) {
 				apiKeyService.changeKey();
 			}
 		}

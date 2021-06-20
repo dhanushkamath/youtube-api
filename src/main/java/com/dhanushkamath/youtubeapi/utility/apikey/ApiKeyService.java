@@ -16,23 +16,27 @@ import com.dhanushkamath.youtubeapi.exception.GlobalControllerExceptionHandler;
 public class ApiKeyService {
 	@Value("${api.key.list}")
 	private List<String> keyList;
-	
+
 	private int currentKeyIndex = 0;
-	
+
 	private Logger logger = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
-	
-	/** Fetches current API key.
+
+	/**
+	 * Fetches current API key.
+	 * 
 	 * @param lastName A double containing the employee’s
 	 * @return String representing API Key.
-	*/
+	 */
 	public String getCurrentApiKey() {
 		return keyList.get(this.currentKeyIndex);
 	}
-	/** Switches to the next API key.
-	*/
+
+	/**
+	 * Switches to the next API key.
+	 */
 	public synchronized void changeKey() {
-		this.currentKeyIndex = ( (this.currentKeyIndex + 1) % keyList.size() );
+		this.currentKeyIndex = ((this.currentKeyIndex + 1) % keyList.size());
 		logger.debug("Switched to API Key #{} : {}", currentKeyIndex, this.getCurrentApiKey());
 	}
-	
+
 }

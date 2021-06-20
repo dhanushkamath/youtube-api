@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 import com.dhanushkamath.youtubeapi.constants.Constants;
 import com.dhanushkamath.youtubeapi.video.Video;
 
-/** Service for interacting with DB.
+/**
+ * Service for interacting with DB.
  */
 @Service
 public class DatabaseService {
@@ -28,9 +29,12 @@ public class DatabaseService {
 		videoRepository.save(video);
 	}
 
-	/** Get the latest results limited by maxResults
+	/**
+	 * Get the latest results limited by maxResults
+	 * 
 	 * @param maxResults Maximum number of results to be fetched
-	 * @return List of videos sorted in reverse chronological order of publishing date-time.
+	 * @return List of videos sorted in reverse chronological order of publishing
+	 *         date-time.
 	 */
 	public List<Video> getVideosInReverseChronologicOrder(int maxResults) {
 		Pageable paging = PageRequest.of(0, maxResults)
@@ -39,10 +43,12 @@ public class DatabaseService {
 		return videoPage.getContent();
 	}
 
-	/** Get the latest paginated results
+	/**
+	 * Get the latest paginated results
+	 * 
 	 * @param page the page number
 	 * @param size the page size
-	 * @return Page embedded with Video. 
+	 * @return Page embedded with Video.
 	 */
 	public Page<Video> getVideosInReverseChronologicalOrder(int page, int size) {
 		Pageable paging = PageRequest.of(page, size)
@@ -51,8 +57,10 @@ public class DatabaseService {
 		return videoPage;
 	}
 
-	/** Get the top search results for provided text limited by maxResults
-	 * @param text Text to be searched for
+	/**
+	 * Get the top search results for provided text limited by maxResults
+	 * 
+	 * @param text       Text to be searched for
 	 * @param maxResults Maximum number of results to be fetched
 	 * @return List of videos.
 	 */
@@ -64,12 +72,14 @@ public class DatabaseService {
 		List<Video> videoList = videoPage.getContent();
 		return videoList;
 	}
-		
-	/** Get the paginated top search results for provided text
+
+	/**
+	 * Get the paginated top search results for provided text
+	 * 
 	 * @param text Text to be searched for
 	 * @param page the page number
 	 * @param size the page size
-	 * @return Page embedded with Video. 
+	 * @return Page embedded with Video.
 	 */
 	public Page<Video> getVideosByText(String text, int page, int size) {
 		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(text.split("\\s+"));

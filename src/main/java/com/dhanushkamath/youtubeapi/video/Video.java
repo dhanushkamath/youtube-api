@@ -10,30 +10,32 @@ import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.TextScore;
 
-/** Model for Video.
- * */
-@Document(collection="Video")
+/**
+ * Model for Video.
+ */
+@Document(collection = "Video")
 public class Video {
 	@Id
 	private String videoId;
-	
-	@TextIndexed(weight=2)
+
+	@TextIndexed(weight = 2)
 	private String title;
-	
+
 	@TextIndexed()
 	private String description;
-	
-	// Only used while running full text search. Used for sorting text search results.
+
+	// Only used while running full text search. Used for sorting text search
+	// results.
 	@TextScore
-	private Float textSearchScore; 
-	
+	private Float textSearchScore;
+
 	@Indexed(name = "publishedAt_index", direction = IndexDirection.DESCENDING)
 	private Instant publishedAt;
 
-	Map<String, Thumbnail> thumbnails; 
-	
+	Map<String, Thumbnail> thumbnails;
+
 	public Video() {
-		
+
 	}
 
 	public Video(String title, String description, Instant datetime, Map<String, Thumbnail> thumbnails) {
@@ -75,7 +77,7 @@ public class Video {
 	public void setThumbnails(Map<String, Thumbnail> thumbnails) {
 		this.thumbnails = thumbnails;
 	}
-	
+
 	public String getVideoId() {
 		return videoId;
 	}
@@ -90,7 +92,4 @@ public class Video {
 				+ videoId + ", thumbnails=" + thumbnails + "]";
 	}
 
-
-	
-	
 }
