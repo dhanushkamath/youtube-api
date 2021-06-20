@@ -16,30 +16,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Configuration
 public class ApplicationConfiguration {
 	@Bean()
-	@ConfigurationProperties(prefix="info")
+	@ConfigurationProperties(prefix = "info")
 	public Info getInfo() {
 		return new Info();
 	}
-	
+
 	@Bean
 	public RestTemplate getRestTemplate() {
-	    return new RestTemplate();
+		return new RestTemplate();
 	}
-	
+
 	@Bean
 	public ObjectMapper getObjectMapper() {
-		ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+				false);
 		objectMapper.findAndRegisterModules();
 		return objectMapper;
 	}
-	
+
 	@Bean
 	public CommonsRequestLoggingFilter requestLoggingFilter() {
-	    CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
-	    loggingFilter.setIncludeClientInfo(true);
-	    loggingFilter.setIncludeQueryString(true);
-	    loggingFilter.setIncludePayload(true);
-	    loggingFilter.setIncludeHeaders(false);
-	    return loggingFilter;
+		CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+		loggingFilter.setIncludeClientInfo(true);
+		loggingFilter.setIncludeQueryString(true);
+		loggingFilter.setIncludePayload(true);
+		loggingFilter.setIncludeHeaders(false);
+		return loggingFilter;
 	}
 }

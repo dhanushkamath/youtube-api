@@ -12,27 +12,32 @@ import org.springframework.stereotype.Service;
 import com.dhanushkamath.youtubeapi.utility.db.DatabaseService;
 import com.dhanushkamath.youtubeapi.video.Video;
 
-
-/** Client to fetch video from database.
+/**
+ * Client to fetch video from database.
  */
 @Service("databaseVideoClient")
-public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClient, IVideoFetchPageableClient, IVideoSearchPageableClient{
-	
+public class DatabaseVideoClient
+		implements IVideoFetchClient, IVideoSearchClient, IVideoFetchPageableClient, IVideoSearchPageableClient {
+
 	@Autowired
 	DatabaseService databaseService;
-	
-	/** Get the latest results limited by maxResults
+
+	/**
+	 * Get the latest results limited by maxResults
+	 * 
 	 * @param maxResults Maximum number of results to be fetched
-	 * @return List of videos. 
+	 * @return List of videos.
 	 */
 	@Override
 	public List<Video> getLatestVideos(int maxResults) {
 		List<Video> videoList = databaseService.getVideosInReverseChronologicOrder(maxResults);
 		return videoList;
 	}
-	
-	/** Get the top search results for provided text limited by maxResults
-	 * @param text Text to be searched for
+
+	/**
+	 * Get the top search results for provided text limited by maxResults
+	 * 
+	 * @param text       Text to be searched for
 	 * @param maxResults Maximum number of results to be fetched
 	 * @return List of videos.
 	 */
@@ -41,8 +46,10 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 		List<Video> videoList = databaseService.getVideosByText(text, maxResults);
 		return videoList;
 	}
-	
-	/** Get the latest paginated results
+
+	/**
+	 * Get the latest paginated results
+	 * 
 	 * @param page the page number
 	 * @param size the page size
 	 * @return Map representing paginated response.
@@ -53,8 +60,10 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 		Map<String, Object> response = this.preparePaginatedReponse(videoPage);
 		return response;
 	}
-	
-	/** Get the top search results for provided text
+
+	/**
+	 * Get the top search results for provided text
+	 * 
 	 * @param text Text to be searched for
 	 * @param page the page number
 	 * @param size the page size
@@ -67,11 +76,13 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 		return response;
 	}
 
-	/** Prepare paginated response Map.
+	/**
+	 * Prepare paginated response Map.
+	 * 
 	 * @param videoPage Page embedded with video.
 	 * @return Map representing paginated response.
 	 */
-	private Map<String, Object> preparePaginatedReponse(Page<Video> videoPage){
+	private Map<String, Object> preparePaginatedReponse(Page<Video> videoPage) {
 		Map<String, Object> response = new HashMap();
 		List<Video> videoList = new ArrayList<>();
 		videoList = videoPage.getContent();
@@ -81,6 +92,5 @@ public class DatabaseVideoClient implements IVideoFetchClient, IVideoSearchClien
 		response.put("totalPages", videoPage.getTotalPages());
 		return response;
 	}
-
 
 }
