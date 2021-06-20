@@ -18,6 +18,8 @@ import com.dhanushkamath.youtubeapi.utility.apikey.ApiKeyService;
 import com.dhanushkamath.youtubeapi.utility.videoclient.IVideoFetchClient;
 import com.dhanushkamath.youtubeapi.video.Video;
 
+/** Utility for populating DB with fresh video results periodically.
+ * */
 @Component
 public class DatabasePopulator {
 	@Autowired
@@ -34,13 +36,15 @@ public class DatabasePopulator {
 	private int videoFetchMaxResults;
 
 	private Logger logger = LoggerFactory.getLogger(DatabasePopulator.class);
-
+	
+	/** Fetches videos from YouTube periodically and saves it in DB.
+	 * */
 	@Scheduled(fixedDelayString = "${video.fetch.interval}")
 	public void fetchAndPopulate() {
 		try {
 			List<Video> videoList = videoFetchClient.getLatestVideos(videoFetchMaxResults);
 			dbService.saveVideoList(videoList);
-			logger.info("Saved {} in database.", videoList.size());
+			logger.debug("Saved {} in database.", videoList.size());
 		} catch (HttpClientErrorException e) {
 			HttpStatus statusCode = e.getStatusCode();
 			logger.warn("The HTTP client returned a {} response", statusCode);

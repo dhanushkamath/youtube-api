@@ -2,6 +2,9 @@ package com.dhanushkamath.youtubeapi.info;
 
 import com.dhanushkamath.youtubeapi.constants.Constants;
 
+/*
+ * Model for Info response
+ * */
 public class Info {
 	String name;
 	String description;

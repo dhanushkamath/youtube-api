@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dhanushkamath.youtubeapi.constants.Constants;
 import com.dhanushkamath.youtubeapi.utility.videoclient.YoutubeVideoClient;
 
+/*
+ * Controller for /videos endpoint
+ * */
 @RestController
 public class VideoController {
 	
@@ -25,6 +28,11 @@ public class VideoController {
 	@Autowired
 	VideoService videoService;
 	
+	/** handles Get requests to /videos endpoint
+	 * @param page the page number
+	 * @param size the page size
+	 * @param text text to be searched for within title and description of stored collection of videos.
+	 * */
 	@RequestMapping("/videos")
 	public ResponseEntity<Map<String, Object>> getVideos(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer size, @RequestParam(required=false) String text){
 		Map<String, Object> videos = new HashMap<>();

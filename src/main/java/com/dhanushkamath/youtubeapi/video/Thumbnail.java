@@ -1,5 +1,7 @@
 package com.dhanushkamath.youtubeapi.video;
 
+/** Model for thumbnail.
+ * */
 public class Thumbnail {
 	private String url;
 	private String width;

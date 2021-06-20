@@ -10,6 +10,9 @@ import com.dhanushkamath.youtubeapi.info.Info;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/*
+ * Java config for additional beans needed within app.
+ * */
 @Configuration
 public class ApplicationConfiguration {
 	@Bean()

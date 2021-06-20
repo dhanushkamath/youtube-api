@@ -1,5 +1,8 @@
 package com.dhanushkamath.youtubeapi.constants;
 
+/*
+ * Class containing all constants defined throughout the app.
+ * */
 public final class Constants {
 	
 	private Constants() {

@@ -39,6 +39,10 @@ public class YoutubeVideoClient implements IVideoFetchClient {
 	@Autowired
 	private ApiKeyService apiKeyService;
 	
+	/** Get the latest results limited by maxResults
+	 * @param maxResults Maximum number of results to be fetched
+	 * @return List of videos. 
+	 */
 	@Override
 	public List<Video> getLatestVideos(int maxResults) {		
 		HttpHeaders headers = new HttpHeaders();
