@@ -23,8 +23,6 @@ public class ApiKeyService {
 
 	/**
 	 * Fetches current API key.
-	 * 
-	 * @param lastName A double containing the employee’s
 	 * @return String representing API Key.
 	 */
 	public String getCurrentApiKey() {
