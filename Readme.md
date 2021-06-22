@@ -1,6 +1,6 @@
 # Youtube API
 <p align="center">
-An API that fetches the latest YouTube videos for a given topic. <br><br>
+An application exposing an API that fetches the latest YouTube videos for a given topic. Latest YouTube videos pertaining to a topic are asynchronously fetched and populated in a database. <br><br>
   <a href="https://spring.io/projects/spring-boot">
     <img alt="RabbitMQ" src = "https://i2.wp.com/www.thecuriousdev.org/wp-content/uploads/2017/12/spring-boot-logo.png" height=50 width=100>
   </a>
